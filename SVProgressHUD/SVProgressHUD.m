@@ -71,7 +71,7 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
 #if !defined(SV_APP_EXTENSIONS)
     dispatch_once(&once, ^{ sharedView = [[self alloc] initWithFrame:self.mainWindow.bounds]; });
 #else
-    dispatch_once(&once, ^{ sharedView = [[self alloc] initWithFrame:self.mainWindow bounds]; });
+    dispatch_once(&once, ^{ sharedView = [[self alloc] initWithFrame:self.mainWindow.bounds]; });
 #endif
     return sharedView;
 }
@@ -657,10 +657,10 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
     double animationDuration = 0.0;
     
 #if !defined(SV_APP_EXTENSIONS) && TARGET_OS_IOS
-    self.frame = [SVProgressHUD mainWindow].bounds;
+    self.frame = (self.window ?: SVProgressHUD.mainWindow).bounds;
     UIInterfaceOrientation orientation = UIApplication.sharedApplication.statusBarOrientation;
 #elif !defined(SV_APP_EXTENSIONS) && !TARGET_OS_IOS
-    self.frame= [SVProgressHUD mainWindow].bounds;
+    self.frame= (self.window ?: SVProgressHUD.mainWindow).bounds;
 #else
     if (self.viewForExtension) {
         self.frame = self.viewForExtension.frame;

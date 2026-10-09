@@ -696,7 +696,7 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
     CGRect orientationFrame = window.safeAreaLayoutGuide.layoutFrame;
     
 #if !defined(SV_APP_EXTENSIONS) && TARGET_OS_IOS
-    CGRect statusBarFrame = self.window.windowScene.statusBarManager.statusBarFrame;
+    CGRect statusBarFrame = window.windowScene.statusBarManager.statusBarFrame;
 #else
     CGRect statusBarFrame = CGRectZero;
 #endif

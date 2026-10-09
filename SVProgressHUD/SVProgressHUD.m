@@ -655,10 +655,11 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
 - (void)positionHUD:(NSNotification*)notification {
     CGFloat keyboardHeight = 0.0f;
     double animationDuration = 0.0;
+    UIWindow *window = self.window ?: SVProgressHUD.mainWindow;
     
 #if !defined(SV_APP_EXTENSIONS) && TARGET_OS_IOS
-    self.frame = (self.window ?: SVProgressHUD.mainWindow).bounds;
-    UIInterfaceOrientation orientation = UIApplication.sharedApplication.statusBarOrientation;
+    self.frame = window.bounds;
+    UIInterfaceOrientation orientation = self.window.windowScene.interfaceOrientation;
 #elif !defined(SV_APP_EXTENSIONS) && !TARGET_OS_IOS
     self.frame= (self.window ?: SVProgressHUD.mainWindow).bounds;
 #else
@@ -692,10 +693,10 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
 #endif
     
     // Get the currently active frame of the display (depends on orientation)
-    CGRect orientationFrame = self.bounds;
+    CGRect orientationFrame = window.safeAreaLayoutGuide.layoutFrame;
     
 #if !defined(SV_APP_EXTENSIONS) && TARGET_OS_IOS
-    CGRect statusBarFrame = UIApplication.sharedApplication.statusBarFrame;
+    CGRect statusBarFrame = self.window.windowScene.statusBarManager.statusBarFrame;
 #else
     CGRect statusBarFrame = CGRectZero;
 #endif

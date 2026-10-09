@@ -150,5 +150,11 @@ typedef void (^SVProgressHUDDismissCompletion)(void);
 
 + (NSTimeInterval)displayDurationForString:(nullable NSString*)string;
 
+- (void)show;
+- (void)showStatus:(nullable NSString *)status;
+- (void)showProgress:(float)progress status:(nullable NSString *)status;
+- (void)dismiss;
+- (void)dismissWithDelay:(NSTimeInterval)delay completion:(nullable SVProgressHUDDismissCompletion)completion;
+
 @end
 
